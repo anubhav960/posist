@@ -1,0 +1,60 @@
+import time
+import hashlib
+import random
+id_genesis=1
+
+class Block(object):
+	
+	def __init__(timestamp,data,nodeNumber,nodeId,referenceNodeId,childReferenceNodeId ,genesisReferenceNodeId ,Hashvalue):
+		self.data=data
+		self.nodeNumber=nodeNumber
+		self.nodeId=nodeId
+		self.referenceNodeId=referenceNodeId
+		self.childReferenceNodeId=childReferenceNodeId
+		self.genesisReferenceNodeId=genesisReferenceNodeId
+		self.timestamp=timestamp
+		self.Hashvalue=self.get_block_hash(self)
+
+	def get_block_hash(self):
+		block_string= "{}{}{}{}{}".format(self.data,self.nodeNumber,self.referenceNodeId,self.childReferenceNodeId,self.genesisReferenceNodeId)
+		return hash_lib.sha256 (block_string.encode()).hexdigest()
+
+
+
+class BlockChain(object):
+    
+    def __init__(self):
+        self.chain = []
+        self.current_node_transactions = []
+        self.create_genesis_block()
+    
+    def create_genesis_block(self):
+    	print("here")
+    	self.create_new_block(proof=0, previous_hash=0)
+    
+    def create_new_block(self, proof, previous_hash):
+    	    print("hi i am here")
+    	    s=""
+    	    id_reference=0
+    	    if(len(self.chain)==0):
+    	    	s=str(len(self.chain))+str(150.00)+str("Genesis Block")
+    	    	id_reference=1
+    	    else:
+    	    	value1=random.uniform( 0, 150 )
+    	    	s=str(len(self.chain))+str(value1)+str("Genesis Block")
+    	    s2=hash_lib.sha256(s.encode()).hexdigest()
+    	    data=hash_lib.sha256(s2.encode()).hexdigest()
+    	    block = Block(
+            timestamp=time.time(),
+            data=data,
+            nodeNumber=len(self.chain),
+            nodeId=''.join(random.choice(string.ascii_lowercase) for _ in range(N)),
+            referenceNodeId=id_reference,
+            childReferenceNodeId=0,
+            genesisReferenceNodeId=1
+          )
+	        self.chain.append(block)
+	        print("genesis block created")
+	        return blocks
+        
+blockchain = BlockChain()
